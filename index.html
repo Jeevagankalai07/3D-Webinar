@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkedIn Career Acceleration | Start for ₹100</title>
+  <meta name="description" content="Get a LinkedIn profile audit and personalized roadmap to help recruiters notice you." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ---------- Design tokens (from Figma) ---------- */
+    :root {
+      --bg-main: #faf8ff;
+      --bg-alt: #f2f3ff;
+      --bg-tint: #e2e7ff;
+      --white: #ffffff;
+      --pill-bg: #e2e7ff;
+      --pill-text: #45464d;
+      --chip-bg: #dbe1ff;
+      --chip-text: #00174b;
+      --icon-bg: #eaedff;
+      --primary: #0051d5;
+      --navy: #14213d;
+      --ink: #000a24;
+      --ink-2: #131b2e;
+      --body: #45464d;
+      --muted: #75777e;
+      --muted-dark: #7c89aa;
+      --success: #22c55e;
+      --font-head: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --shadow-card: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-lift: 0 25px 50px -12px rgba(0,0,0,0.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--body);
+      background: var(--bg-main);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button, input { font: inherit; }
+    .icon { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* ---------- Shared pieces ---------- */
+    .container { max-width: 1184px; margin: 0 auto; padding: 0 48px; width: 100%; }
+    .section { padding: 80px 0; position: relative; overflow: hidden; }
+    .section-header { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 768px; margin: 0 auto; gap: 16px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 4px 14px; border-radius: 9999px;
+      background: var(--pill-bg); color: var(--pill-text);
+      font-family: var(--font-head); font-weight: 500; font-size: 16px;
+      letter-spacing: 0.8px; text-transform: uppercase; white-space: nowrap;
+    }
+    .h2 {
+      font-family: var(--font-head); font-weight: 700; font-size: 16px;
+      letter-spacing: -0.4px; color: var(--ink); margin: 0; line-height: 24px;
+    }
+    .lead { color: var(--body); margin: 0; line-height: 24px; }
+    .eyebrow {
+      font-family: var(--font-head); font-weight: 500; font-size: 12px;
+      letter-spacing: 0.6px; text-transform: uppercase; color: var(--primary);
+    }
+    .card-title { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--ink); margin: 0; line-height: 24px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border: 0; border-radius: 12px; cursor: pointer;
+      font-family: var(--font-head); font-weight: 500; font-size: 16px; line-height: 24px;
+      padding: 14px 32px; transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1); }
+    .btn-primary:hover { background: #0046b8; }
+    .btn-light { background: #fff; color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+    .btn:disabled { opacity: .7; cursor: not-allowed; transform: none; }
+
+    /* ---------- 1. Hero ---------- */
+    .hero { background: var(--bg-main); padding: 96px 0; }
+    .hero-glow {
+      position: absolute; width: 700px; height: 500px; left: 50%; top: -16%;
+      transform: translateX(-50%); border-radius: 9999px;
+      background: rgba(0,81,213,0.05); filter: blur(64px); pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; width: 384px; height: 384px; right: 0; top: -48px;
+      border-radius: 9999px; background: rgba(20,33,61,0.05); filter: blur(40px); pointer-events: none;
+    }
+    .hero-grid {
+      position: relative; display: grid; grid-template-columns: 677fr 475fr; gap: 32px; align-items: center;
+    }
+    .hero-left { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
+    .tagline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--chip-bg); padding: 6px 14px; border-radius: 9999px;
+      box-shadow: 0 1px 1px rgba(0,0,0,.05);
+      font-family: var(--font-head); font-weight: 500; font-size: 16px; color: var(--chip-text); letter-spacing: .4px;
+    }
+    .tagline .dot { width: 8px; height: 8px; border-radius: 9999px; background: var(--primary); }
+    .hero-headline { font-family: var(--font-head); font-weight: 800; font-size: 16px; color: var(--ink); letter-spacing: -.4px; margin: 0; line-height: 20px; }
+    .hero-text { max-width: 672px; margin: 0; line-height: 26px; }
+    .offer-strip {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #e2e7ff; padding: 8px 16px; border-radius: 12px;
+      box-shadow: 0 1px 1px rgba(0,0,0,.05);
+      font-family: var(--font-head); font-weight: 500; font-size: 16px; color: var(--ink);
+    }
+    .offer-strip strong { font-weight: 700; color: var(--primary); }
+    .offer-strip .badge {
+      background: var(--primary); color: #fff; font-size: 12px; font-weight: 600;
+      padding: 2px 8px; border-radius: 9999px; line-height: 16px; white-space: nowrap;
+    }
+    .offer-strip .icon { color: var(--primary); width: 14px; height: 14px; }
+    .cta-row { display: flex; gap: 16px; align-items: center; padding-top: 8px; flex-wrap: wrap; }
+    .micro-note { display: flex; gap: 8px; align-items: flex-start; padding-top: 4px; color: var(--muted); }
+    .micro-note .icon { width: 14px; height: 14px; color: var(--primary); margin-top: 4px; }
+
+    .hero-visual { position: relative; width: 100%; max-width: 474px; justify-self: center; }
+    .hero-photo-wrap {
+      position: relative; border-radius: 24px; overflow: hidden; background: #14213d;
+      box-shadow: var(--shadow-lift); aspect-ratio: 474 / 354;
+    }
+    .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-photo-fallback {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.5); font-size: 14px; text-align: center; padding: 16px;
+      background: linear-gradient(135deg, #14213d 0%, #2c3e66 100%);
+    }
+    .hero-photo-wrap::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,10,36,.6), rgba(0,10,36,0));
+      pointer-events: none;
+    }
+    .hero-backdrop {
+      position: absolute; inset: -8px -6px; border-radius: 24px;
+      background: linear-gradient(36deg, rgba(0,81,213,.2) 0%, rgba(20,33,61,.1) 100%);
+      transform: rotate(2deg); filter: blur(4px);
+    }
+    .float-card {
+      position: absolute; background: rgba(255,255,255,.95);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0,0,0,.1), 0 8px 10px -6px rgba(0,0,0,.1);
+    }
+    .float-top { top: -24px; right: -24px; display: flex; align-items: center; gap: 14px; padding: 16px; max-width: 240px; }
+    .float-top .ico { width: 37px; height: 40px; border-radius: 12px; background: var(--chip-bg); display: flex; align-items: center; justify-content: center; color: var(--primary); }
+    .float-top .big { font-family: var(--font-head); font-weight: 800; font-size: 16px; color: var(--ink); line-height: 24px; white-space: nowrap; }
+    .float-top .small { font-size: 12px; color: var(--muted); line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .float-bottom { bottom: -32px; left: -24px; width: 280px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .profile-row { display: flex; gap: 12px; align-items: center; }
+    .avatar {
+      position: relative; width: 40px; height: 44px; border-radius: 9999px; background: var(--navy);
+      color: #fff; font-family: var(--font-head); font-weight: 700; font-size: 16px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .avatar .verified {
+      position: absolute; right: 0; bottom: 0; width: 14px; height: 14px; border-radius: 9999px;
+      background: var(--primary); display: flex; align-items: center; justify-content: center;
+    }
+    .avatar .verified .icon { width: 8px; height: 8px; color: #fff; }
+    .profile-name { display: flex; gap: 4px; align-items: center; }
+    .profile-name b { font-family: var(--font-head); font-weight: 700; font-size: 14px; color: var(--ink); line-height: 20px; }
+    .all-star {
+      background: var(--chip-bg); color: var(--primary); font-size: 10px; font-weight: 600;
+      padding: 2px 6px; border-radius: 4px; line-height: 15px;
+    }
+    .profile-sub { font-size: 12px; color: var(--muted); line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .float-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; font-size: 11px; }
+    .status { display: flex; align-items: center; gap: 6px; color: var(--body); font-family: var(--font-head); font-weight: 500; }
+    .status::before { content: ""; width: 6px; height: 6px; border-radius: 9999px; background: var(--success); }
+    .conn { color: var(--primary); font-family: var(--font-head); font-weight: 600; }
+
+    /* ---------- 2. Problem ---------- */
+    .problem { background: var(--bg-alt); padding: 80px 0; }
+    .problem .section-header { gap: 0; }
+    .problem .section-header .pill { margin-bottom: 12px; }
+    .problem .section-header .h2 { margin-bottom: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; width: 100%; margin-top: 56px; }
+    .problem-card {
+      background: var(--white); border-radius: 16px; padding: 24px; box-shadow: var(--shadow-card);
+      display: flex; flex-direction: column; gap: 26px;
+    }
+    .problem-card .top { display: flex; justify-content: space-between; align-items: center; }
+    .ico-box { width: 48px; height: 48px; border-radius: 12px; background: var(--icon-bg); color: var(--ink); display: flex; align-items: center; justify-content: center; }
+    .ico-box .icon { width: 22px; height: 22px; }
+    .tag-label { font-family: var(--font-head); font-weight: 500; font-size: 11px; letter-spacing: .55px; text-transform: uppercase; color: var(--muted); }
+    .problem-card .body { color: var(--body); margin: 0; line-height: 26px; }
+    .problem-card .foot { margin-top: auto; padding-top: 16px; display: flex; gap: 6px; align-items: center; color: var(--primary); font-weight: 600; font-size: 12px; }
+    .problem-card .foot .icon { width: 12px; height: 12px; }
+    .problem-card .card-title { margin-top: 12px; }
+
+    /* ---------- 3. Achievement ---------- */
+    .achievement { background: rgba(226,231,255,.4); padding: 80px 0; }
+    .achievement .section-header { gap: 16px; }
+    .achievement .lead { max-width: 768px; }
+    .verified-chip {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
+      background: #fff; padding: 4px 12px; border-radius: 9999px; box-shadow: 0 1px 1px rgba(0,0,0,.05);
+      color: var(--primary); font-weight: 600; font-size: 12px; line-height: 16px;
+    }
+    .verified-chip .icon { width: 13px; height: 13px; }
+    .grid-4-win { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; }
+    .win-card {
+      background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 1px 1px rgba(0,0,0,.05);
+      display: flex; flex-direction: column; justify-content: space-between; gap: 24px;
+    }
+    .win-card .ico-box { width: 40px; height: 40px; border-radius: 8px; }
+    .win-card .ico-box .icon { width: 18px; height: 18px; }
+    .win-card .card-title { margin-top: 8px; }
+    .win-card .body { color: var(--body); margin: 8px 0 0; line-height: 24px; }
+    .win-card .foot { color: var(--primary); font-weight: 600; font-size: 12px; line-height: 16px; padding-top: 12px; }
+
+    /* ---------- 4. Services ---------- */
+    .services { background: var(--bg-main); padding: 80px 0; }
+    .services .section-header { gap: 16px; }
+    .services .section-header .pill { background: var(--chip-bg); color: var(--chip-text); margin-bottom: 12px; }
+    .services .section-header .h2 { margin-bottom: 16px; }
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; width: 100%; margin-top: 64px; }
+    .service {
+      background: #fff; border-radius: 16px; padding: 40px; box-shadow: var(--shadow-card);
+      position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; min-height: 468px;
+    }
+    .service .head { display: flex; gap: 16px; align-items: center; }
+    .service .icon-tile { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .service .icon-tile .icon { width: 26px; height: 26px; }
+    .service .kicker { font-family: var(--font-head); font-weight: 700; font-size: 12px; letter-spacing: .6px; text-transform: uppercase; color: var(--primary); line-height: 16px; }
+    .service .title { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--ink); line-height: 24px; }
+    .service .desc { margin: 20px 0 0; color: var(--body); line-height: 24px; }
+    .service ul { list-style: none; padding: 4px 0 0; margin: 20px 0 0; display: flex; flex-direction: column; gap: 12px; }
+    .service li { display: flex; gap: 12px; align-items: flex-start; color: var(--ink-2); line-height: 24px; }
+    .service li .icon { width: 17px; height: 17px; color: var(--primary); margin-top: 3px; }
+    .service .foot { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; margin-top: 32px; }
+    .service .foot span { font-weight: 600; font-size: 12px; line-height: 16px; color: var(--muted); }
+    .service .foot span:last-child { color: var(--primary); }
+    .service::after {
+      content: ""; position: absolute; top: -40px; right: -40px; width: 128px; height: 128px;
+      border-radius: 9999px; background: rgba(0,81,213,.05); pointer-events: none;
+    }
+    .service.alt::after { background: rgba(20,33,61,.05); }
+
+    /* ---------- 5. How it works ---------- */
+    .how { background: var(--bg-main); padding: 80px 0; }
+    .how .section-header { gap: 16px; }
+    .how .section-header .pill { margin-bottom: 12px; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; width: 100%; margin-top: 64px; }
+    .step { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 1px 1px rgba(0,0,0,.05); padding-bottom: 56px; display: flex; flex-direction: column; }
+    .step .top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 24px; }
+    .step .num { font-family: var(--font-head); font-weight: 800; font-size: 36px; line-height: 40px; color: rgba(0,81,213,.3); }
+    .step .ico-box { width: 48px; height: 48px; border-radius: 12px; background: var(--icon-bg); color: var(--primary); }
+    .step .ico-box .icon { width: 20px; height: 20px; }
+    .step .card-title { padding-bottom: 12px; }
+    .step p { margin: 0; line-height: 24px; color: var(--body); }
+
+    /* ---------- 6. Form & audit value ---------- */
+    .form-section { background: var(--bg-alt); padding: 80px 0; }
+    .form-section .section-header { gap: 12px; }
+    .form-section .lead { font-size: 16px; }
+    .split { display: grid; grid-template-columns: 677fr 475fr; gap: 32px; margin-top: 56px; align-items: start; }
+    .form-card { background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1); display: flex; flex-direction: column; gap: 24px; }
+    .form-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .form-head .card-title { white-space: nowrap; }
+    .form-head .chip { background: var(--chip-bg); color: var(--chip-text); font-family: var(--font-head); font-weight: 500; font-size: 12px; line-height: 16px; padding: 4px 10px; border-radius: 4px; white-space: nowrap; }
+    form { display: flex; flex-direction: column; gap: 20px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label { font-family: var(--font-head); font-weight: 500; font-size: 14px; line-height: 20px; color: var(--ink-2); }
+    .input {
+      height: 48px; width: 100%; padding: 15.5px 16px; border: 1px solid transparent; border-radius: 12px;
+      background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.05); color: var(--ink-2); font-size: 14px; outline: none;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    .input::placeholder { color: var(--muted); }
+    .input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,81,213,.15); }
+    .phone-row { display: flex; height: 48px; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+    .phone-code {
+      background: var(--icon-bg); display: flex; flex-direction: column; justify-content: center;
+      padding: 3.5px 36px 4.5px 16px; font-weight: 600; font-size: 14px; line-height: 20px; color: var(--ink-2);
+    }
+    .phone-row .input { border-radius: 0 12px 12px 0; box-shadow: none; height: 100%; }
+    .submit { width: 100%; background: var(--primary); color: #fff; border-radius: 12px; padding: 14px 24px; border: 0; cursor: pointer; font-family: var(--font-head); font-weight: 500; font-size: 16px; display: flex; gap: 8px; align-items: center; justify-content: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1); }
+    .submit:hover { background: #0046b8; }
+    .submit:disabled { opacity: .7; cursor: not-allowed; }
+    .submit .icon { width: 14px; height: 14px; }
+    .form-status { font-size: 14px; line-height: 20px; border-radius: 12px; padding: 12px 16px; display: none; }
+    .form-status.show { display: block; }
+    .form-status.ok { background: #ecfdf3; color: #067647; }
+    .form-status.err { background: #fef3f2; color: #b42318; }
+    .form-status a { color: inherit; font-weight: 700; text-decoration: underline; }
+    .trust { display: flex; justify-content: center; align-items: center; gap: 8px; padding-top: 4px; font-size: 12px; color: var(--muted); text-align: center; flex-wrap: wrap; }
+    .trust .icon { width: 12px; height: 12px; }
+
+    .kickoff {
+      background: var(--navy); border-radius: 16px; padding: 40px; color: #fff;
+      display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,.1), 0 8px 10px -6px rgba(0,0,0,.1);
+    }
+    .kickoff .eyebrow-row { display: flex; align-items: center; gap: 8px; }
+    .kickoff .eyebrow-row .dot { width: 10px; height: 10px; border-radius: 9999px; background: var(--primary); }
+    .kickoff .eyebrow-row span { font-family: var(--font-head); font-weight: 500; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted-dark); }
+    .kickoff h3 { font-family: var(--font-head); font-weight: 700; font-size: 16px; line-height: 24px; margin: 0; color: #fff; }
+    .kickoff .lead-dark { color: var(--muted-dark); margin: 0; line-height: 24px; }
+    .deliverables { display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
+    .deliverable {
+      background: rgba(255,255,255,.1); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      border-radius: 12px; padding: 14px; display: flex; gap: 12px; align-items: flex-start;
+    }
+    .deliverable .icon { width: 17px; height: 17px; color: #fff; margin-top: 2px; }
+    .deliverable b { display: block; font-weight: 600; font-size: 16px; line-height: 24px; color: #fff; }
+    .deliverable small { display: block; font-size: 12px; line-height: 16px; color: var(--muted-dark); margin-top: 4px; }
+    .kickoff-foot {
+      background: rgba(255,255,255,.05); margin: 0 -40px -40px; padding: 24px 40px 12px;
+      border-radius: 0 0 16px 16px; display: flex; justify-content: space-between; font-size: 12px;
+    }
+    .kickoff-foot span:first-child { color: var(--muted-dark); }
+    .kickoff-foot span:last-child { color: #fff; font-weight: 600; }
+
+    /* ---------- 7. Pricing ---------- */
+    .pricing { background: var(--bg-main); padding: 80px 0; }
+    .pricing .section-header { gap: 12px; }
+    .price-card {
+      position: relative; background: #fff; border-radius: 24px; padding: 48px; overflow: hidden;
+      max-width: 672px; margin: 56px auto 0; text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,.1), 0 8px 10px -6px rgba(0,0,0,.1);
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .price-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px;
+      background: linear-gradient(90deg, #0051d5, #316bf3 50%, #000a24);
+    }
+    .price-card .pill { margin-bottom: 24px; }
+    .price { display: flex; align-items: flex-end; gap: 8px; justify-content: center; padding-bottom: 8px; }
+    .price .amount { font-family: var(--font-head); font-weight: 800; font-size: 60px; line-height: 60px; color: var(--ink); }
+    .price .per { color: var(--muted); line-height: 24px; padding-bottom: 6px; }
+    .price-sub { color: var(--muted); padding-bottom: 24px; margin: 0; line-height: 24px; }
+    .price-desc { max-width: 448px; padding: 0 14px 32px; margin: 0; line-height: 24px; color: var(--body); }
+    .pay-btn {
+      display: inline-flex; align-items: center; gap: 8px; min-width: 280px; justify-content: center;
+      background: var(--primary); color: #fff; border-radius: 12px; padding: 16px 48px;
+      font-family: var(--font-head); font-weight: 500; font-size: 16px; line-height: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1); transition: background .15s ease, transform .15s ease;
+    }
+    .pay-btn:hover { background: #0046b8; transform: translateY(-1px); }
+    .pay-btn .icon { width: 17px; height: 12px; }
+    .secure { display: flex; align-items: center; gap: 8px; margin-top: 16px; padding-bottom: 24px; font-family: var(--font-head); font-weight: 500; font-size: 12px; color: var(--body); }
+    .secure .icon { width: 11px; height: 13px; color: var(--primary); }
+    .gateway {
+      background: var(--bg-alt); border-radius: 16px; padding: 20px; width: 100%;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .gateway-logos { display: flex; gap: 24px; opacity: .75; flex-wrap: wrap; justify-content: center; }
+    .gateway-logos span { font-weight: 600; font-size: 12px; letter-spacing: .6px; text-transform: uppercase; color: var(--body); }
+    .gateway p { margin: 0; font-size: 12px; line-height: 16px; color: var(--muted); }
+
+    /* ---------- 8. Testimonials ---------- */
+    .testimonials { background: var(--bg-alt); padding: 80px 0; }
+    .testimonials .section-header { gap: 12px; }
+    .testimonials .section-header .pill { background: var(--pill-bg); }
+    .testimonials .section-header .h2 { margin-bottom: 4px; }
+    .testimonials .section-header .sub { color: var(--muted); margin: 0; line-height: 24px; }
+    .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; width: 100%; margin-top: 56px; align-items: stretch; }
+    .t-card { background: #fff; border-radius: 16px; padding: 32px; box-shadow: var(--shadow-card); display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+    .stars { display: flex; gap: 4px; color: var(--primary); }
+    .stars svg { width: 15px; height: 15px; fill: currentColor; }
+    .quote { font-style: italic; color: var(--ink-2); margin: 16px 0 0; line-height: 26px; }
+    .t-foot { margin: 0 -32px -32px; padding: 16px 24px 24px; background: var(--bg-alt); border-radius: 0 0 16px 16px; display: flex; gap: 12px; align-items: center; }
+    .t-avatar { width: 44px; height: 44px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-family: var(--font-body); font-weight: 600; font-size: 14px; flex-shrink: 0; }
+    .t-name { font-family: var(--font-head); font-weight: 700; font-size: 14px; color: var(--ink); line-height: 20px; }
+    .t-role { font-size: 12px; color: var(--muted); line-height: 16px; }
+
+    /* ---------- 9. FAQ ---------- */
+    .faq { background: var(--bg-main); padding: 80px 0; }
+    .faq-wrap { max-width: 896px; margin: 0 auto; padding: 0 48px; display: flex; flex-direction: column; gap: 56px; }
+    .faq .section-header { gap: 12px; }
+    .faq .section-header .pill { margin-bottom: 0; }
+    .faq-list { display: flex; flex-direction: column; gap: 16px; }
+    .faq-item { background: #fff; border-radius: 16px; box-shadow: var(--shadow-card); overflow: hidden; }
+    .faq-q {
+      width: 100%; background: none; border: 0; cursor: pointer; text-align: left;
+      display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; gap: 16px;
+      font-family: var(--font-head); font-weight: 700; font-size: 16px; line-height: 24px; color: var(--ink);
+    }
+    .faq-q .chev { width: 12px; height: 8px; color: var(--primary); flex-shrink: 0; transition: transform .2s ease; }
+    .faq-item.open .faq-q .chev { transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .25s ease; }
+    .faq-a p { margin: 0; padding: 0 24px 20px; line-height: 24px; color: var(--body); }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    /* ---------- 10. Final CTA ---------- */
+    .final { background: var(--navy); padding: 96px 0; color: #fff; }
+    .final-glow-1 { position: absolute; width: 384px; height: 384px; right: -96px; bottom: -96px; border-radius: 9999px; background: rgba(0,81,213,.2); filter: blur(64px); pointer-events: none; }
+    .final-glow-2 { position: absolute; width: 384px; height: 384px; left: -96px; top: -96px; border-radius: 9999px; background: rgba(0,81,213,.15); filter: blur(64px); pointer-events: none; }
+    .final-inner { position: relative; max-width: 896px; margin: 0 auto; padding: 0 48px; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
+    .final .pill-dark {
+      display: inline-flex; background: rgba(255,255,255,.1); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      padding: 6px 16px; border-radius: 9999px; font-family: var(--font-head); font-weight: 500; font-size: 16px;
+      letter-spacing: .8px; text-transform: uppercase; color: #fff;
+    }
+    .final h2 { font-family: var(--font-head); font-weight: 800; font-size: 16px; line-height: 20px; letter-spacing: -.4px; margin: 0; color: #fff; }
+    .final p { margin: 0; max-width: 576px; color: var(--muted-dark); line-height: 26px; }
+    .final .cta-wrap { padding-top: 16px; }
+    .final .btn-primary { padding: 16px 36px; }
+    .final .small-print { font-size: 12px; color: var(--muted-dark); line-height: 16px; padding-top: 8px; margin: 0; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1100px) {
+      .container, .faq-wrap, .final-inner { padding-left: 32px; padding-right: 32px; }
+      .grid-4, .grid-4-win { grid-template-columns: repeat(2, 1fr); }
+      .hero-grid, .split { grid-template-columns: 1fr; }
+      .hero-visual { margin-top: 40px; max-width: 520px; }
+      .float-top { right: -8px; top: -24px; }
+      .float-bottom { left: -8px; }
+      .steps { grid-template-columns: 1fr; }
+      .t-grid { grid-template-columns: 1fr; }
+      .price-card { max-width: 100%; }
+    }
+    @media (max-width: 760px) {
+      .section, .hero, .problem, .achievement, .services, .how, .form-section, .pricing, .testimonials, .faq, .final { padding-top: 56px; padding-bottom: 56px; }
+      .container, .faq-wrap, .final-inner { padding-left: 20px; padding-right: 20px; }
+      .hero-headline, .h2, .final h2 { font-size: 18px; line-height: 26px; }
+      .grid-4, .grid-4-win, .services-grid { grid-template-columns: 1fr; }
+      .services-grid { gap: 20px; }
+      .service { min-height: auto; padding: 28px; }
+      .price-card { padding: 32px 24px; }
+      .price .amount { font-size: 48px; line-height: 52px; }
+      .pay-btn { min-width: 100%; padding: 16px 24px; }
+      .form-card, .kickoff { padding: 28px 24px; }
+      .kickoff-foot { margin: 0 -24px -28px; padding: 20px 24px 12px; }
+      .form-head { flex-wrap: wrap; }
+      .float-top, .float-bottom { position: static; margin: 12px 0 0; max-width: 100%; width: 100%; }
+      .hero-visual { display: flex; flex-direction: column; }
+      .hero-backdrop { display: none; }
+      .cta-row .btn { width: 100%; }
+      .offer-strip { flex-wrap: wrap; }
+      .t-foot { margin: 0 -32px -32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ 1. HERO ============ -->
+  <section class="section hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <span class="tagline"><span class="dot"></span>✨ India's Premier LinkedIn Career Acceleration</span>
+          <h1 class="hero-headline">Your Skills Deserve More Than Just a Silent LinkedIn Profile.</h1>
+          <p class="hero-text">You have the skills. You have the ambition. But is the right audience noticing you? Let's turn your LinkedIn profile into a professional presence that gets noticed by recruiters, builds meaningful connections, and opens new career opportunities.</p>
+          <div class="offer-strip">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Introductory Offer: <strong>Get Started for Just ₹100</strong></span>
+            <span class="badge">Limited Spots</span>
+          </div>
+          <div class="cta-row">
+            <a href="#form" class="btn btn-primary">Build My LinkedIn Presence
+              <svg class="icon" style="width:12px;height:12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#how" class="btn btn-light">Explore How It Works</a>
+          </div>
+          <div class="micro-note">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>No monthly commitment • Immediate audit kick-off • For students, freshers &amp; working pros</span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-backdrop"></div>
+          <div class="hero-photo-wrap">
+            <!-- Save the Figma photo as assets/hero-photo.png (see notes) -->
+            <img src="assets/hero-photo.png" alt="Ambitious young professional working on a laptop" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="hero-photo-fallback" style="display:none">Hero photo: save from Figma as assets/hero-photo.png</div>
+          </div>
+          <div class="float-card float-top">
+            <div class="ico">
+              <svg class="icon" width="22" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <div>
+              <div class="big">Search +340%</div>
+              <div class="small">Profile views by top recruiters</div>
+            </div>
+          </div>
+          <div class="float-card float-bottom">
+            <div class="profile-row">
+              <div class="avatar">RS
+                <span class="verified"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              </div>
+              <div style="min-width:0">
+                <div class="profile-name"><b>Rhea Sharma</b><span class="all-star">All-Star</span></div>
+                <div class="profile-sub">Ex-Intern @ TechCorp | Aspiring APM</div>
+              </div>
+            </div>
+            <div class="float-footer">
+              <span class="status">Open to Opportunities</span>
+              <span class="conn">500+ Connections</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. PROBLEM ============ -->
+  <section class="problem">
+    <div class="container">
+      <div class="section-header">
+        <span class="pill">The Reality Check</span>
+        <h2 class="h2">Is Your LinkedIn Profile Working for You?</h2>
+        <p class="lead">Millions of skilled professionals remain invisible to opportunities simply because their profile doesn't tell their real story.</p>
+      </div>
+
+      <div class="grid-4">
+        <div class="problem-card">
+          <div class="top">
+            <div class="ico-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.53 13.53 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg></div>
+            <span class="tag-label">The Barrier</span>
+          </div>
+          <div>
+            <h3 class="card-title">No Visibility</h3>
+            <p class="body">You have a profile, but hardly anyone notices it. Recruiter search impressions stay flat month after month.</p>
+          </div>
+          <div class="foot"><span>→</span> Profile remains dormant</div>
+        </div>
+        <div class="problem-card">
+          <div class="top">
+            <div class="ico-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
+            <span class="tag-label">The Barrier</span>
+          </div>
+          <div>
+            <h3 class="card-title">No Interview Calls</h3>
+            <p class="body">Applying for jobs but struggling to get noticed? Resumes submitted into portals without digital verification fall flat.</p>
+          </div>
+          <div class="foot"><span>→</span> Low interview pipeline</div>
+        </div>
+        <div class="problem-card">
+          <div class="top">
+            <div class="ico-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
+            <span class="tag-label">The Barrier</span>
+          </div>
+          <div>
+            <h3 class="card-title">No Content Strategy</h3>
+            <p class="body">You have knowledge to share, but don't know what to post, what tone to adopt, or how to avoid cringe outreach.</p>
+          </div>
+          <div class="foot"><span>→</span> Zero inbound interest</div>
+        </div>
+        <div class="problem-card">
+          <div class="top">
+            <div class="ico-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="22" y2="13"/><line x1="22" y1="8" x2="17" y2="13"/></svg></div>
+            <span class="tag-label">The Barrier</span>
+          </div>
+          <div>
+            <h3 class="card-title">No Personal Brand</h3>
+            <p class="body">Your skills deserve a stronger professional identity. A generic bulleted list leaves your unique superpowers hidden.</p>
+          </div>
+          <div class="foot"><span>→</span> Indistinguishable candidate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. ACHIEVEMENT & IMPACT ============ -->
+  <section class="achievement">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="h2">Small Changes. Stronger Presence. Bigger Opportunities.</h2>
+        <p class="lead">Your LinkedIn profile is more than an online resume. It's your first impression before you even enter the interview room.</p>
+        <span class="verified-chip">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          Verified Growth Methodology • Space reserved for your individual career milestones
+        </span>
+      </div>
+
+      <div class="grid-4-win">
+        <div class="win-card">
+          <div>
+            <div class="ico-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M15 9h3M15 13h3M6 17c.5-1.5 1.5-2 3-2s2.5.5 3 2"/></svg></div>
+            <h3 class="card-title">Stronger Profile</h3>
+            <p class="body">Clean architecture, compelling storytelling, and high recruiter search relevance that positions you at the top.</p>
+          </div>
+          <div class="foot">Visual &amp; Architectural Clarity</div>
+        </div>
+        <div class="win-card">
+          <div>
+            <div class="ico-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11a4 4 0 0 0-4 4"/><path d="M12 7a8 8 0 0 0-8 8"/><path d="M16 15a4 4 0 0 0-4-4"/><path d="M20 15a8 8 0 0 0-8-8"/><line x1="12" y1="19" x2="12" y2="21"/></svg></div>
+            <h3 class="card-title">Better Personal Branding</h3>
+            <p class="body">Stand out among thousands of applicants with a distinct voice, crisp visual identity, and authority narrative.</p>
+          </div>
+          <div class="foot">Distinct Market Moat</div>
+        </div>
+        <div class="win-card">
+          <div>
+            <div class="ico-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>
+            <h3 class="card-title">Consistent Content Strategy</h3>
+            <p class="body">Practical content frameworks designed to spark meaningful industry conversations without time exhaustion.</p>
+          </div>
+          <div class="foot">Sustainable Thought Leadership</div>
+        </div>
+        <div class="win-card">
+          <div>
+            <div class="ico-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <h3 class="card-title">Professional Networking</h3>
+            <p class="body">Build high-value relationships with founders, managers, and peers that compound over your entire career.</p>
+          </div>
+          <div class="foot">Compounding Relationship Equity</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. SERVICES ============ -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="pill">Our Tailored Solutions</span>
+        <h2 class="h2">Let's Build a LinkedIn Presence That Speaks for You.</h2>
+        <p class="lead">A systematic, human-crafted approach to transforming your digital professional footprint.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service">
+          <div>
+            <div class="head">
+              <div class="icon-tile" style="background:#dbe1ff;color:#0051d5"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M15 9h3M15 13h3M6 17c.5-1.5 1.5-2 3-2s2.5.5 3 2"/></svg></div>
+              <div>
+                <div class="kicker">Foundation</div>
+                <div class="title">LinkedIn Profile Makeover</div>
+              </div>
+            </div>
+            <p class="desc">Present your skills, experience, and achievements in a professional way that demands respect.</p>
+            <ul>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Headline &amp; About section rewrites with conversion-driven hooks</li>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Featured work curation that displays tangible career achievements</li>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Keyword optimization calibrated for recruiter ATS search algorithms</li>
+            </ul>
+          </div>
+          <div class="foot"><span>Core Deliverable</span><span>Comprehensive Overhaul</span></div>
+        </div>
+
+        <div class="service alt">
+          <div>
+            <div class="head">
+              <div class="icon-tile" style="background:#e2e7ff;color:#0051d5"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11a4 4 0 0 0-4 4"/><path d="M12 7a8 8 0 0 0-8 8"/><path d="M16 15a4 4 0 0 0-4-4"/><path d="M20 15a8 8 0 0 0-8-8"/><line x1="12" y1="19" x2="12" y2="21"/></svg></div>
+              <div>
+                <div class="kicker">Positioning</div>
+                <div class="title">Personal Branding</div>
+              </div>
+            </div>
+            <p class="desc">Build an identity that reflects who you are and what you bring to the table in competitive markets.</p>
+            <ul>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Clear unique value proposition (UVP) tailored to your industry</li>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Visual banner positioning concepts that project authority immediately</li>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Niche authority framing to escape generic titles and job descriptions</li>
+            </ul>
+          </div>
+          <div class="foot"><span>Identity Architecture</span><span>Bespoke Strategy</span></div>
+        </div>
+
+        <div class="service">
+          <div>
+            <div class="head">
+              <div class="icon-tile" style="background:#eaedff;color:#0051d5"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg></div>
+              <div>
+                <div class="kicker">Content Engine</div>
+                <div class="title">Content Strategy</div>
+              </div>
+            </div>
+            <p class="desc">Create meaningful content that helps you share your knowledge and ideas effortlessly.</p>
+            <ul>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Tested post templates engineered for engagement and bookmarking</li>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Topic pillars tailored to your specific field and expertise</li>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Sustainable publishing cadence recommendations (no burnout)</li>
+            </ul>
+          </div>
+          <div class="foot"><span>Voice &amp; Publishing</span><span>Templates &amp; Pillars</span></div>
+        </div>
+
+        <div class="service alt">
+          <div>
+            <div class="head">
+              <div class="icon-tile" style="background:#dbe1ff;color:#0051d5"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v4M12 11l-5 6M12 11l5 6"/></svg></div>
+              <div>
+                <div class="kicker">Network Growth</div>
+                <div class="title">Professional Visibility</div>
+              </div>
+            </div>
+            <p class="desc">Improve how you connect, communicate, and present yourself professionally to decision-makers.</p>
+            <ul>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>High-acceptance connection request frameworks for hiring managers</li>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Networking scripts for organic conversations and informational interviews</li>
+              <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Strategic engagement blueprints for relevant industry creators</li>
+            </ul>
+          </div>
+          <div class="foot"><span>Direct Outreach</span><span>Frameworks &amp; Scripts</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. HOW IT WORKS ============ -->
+  <section class="how" id="how">
+    <div class="container">
+      <div class="section-header">
+        <span class="pill">Simple 3-Step Journey</span>
+        <h2 class="h2">Getting Started Is Simple.</h2>
+        <p class="lead">No complex onboarding or lengthy interviews. We keep the starting process light, focused, and immediately actionable.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="top">
+            <span class="num">01</span>
+            <div class="ico-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="19" cy="5" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="5" cy="19" r="1"/><circle cx="12" cy="19" r="1"/><path d="M15 17l6-6"/></svg></div>
+          </div>
+          <h3 class="card-title">Step 1 – Register</h3>
+          <p style="margin-top:12px">Share your basic details and get started with our lightweight diagnostic intake. Takes less than two minutes.</p>
+        </div>
+        <div class="step">
+          <div class="top">
+            <span class="num">02</span>
+            <div class="ico-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          </div>
+          <h3 class="card-title">Step 2 – Understand Your Goals</h3>
+          <p style="margin-top:12px">Tell us about your career goals and LinkedIn challenges so we can audit your profile with context.</p>
+        </div>
+        <div class="step">
+          <div class="top">
+            <span class="num">03</span>
+            <div class="ico-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg></div>
+          </div>
+          <h3 class="card-title">Step 3 – Build Your Presence</h3>
+          <p style="margin-top:12px">Start improving your professional identity with the right guidance, curated formulas, and prioritized recommendations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. REGISTRATION FORM & AUDIT VALUE ============ -->
+  <section class="form-section" id="form">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="h2">Let's Get Your LinkedIn Journey Started.</h2>
+        <p class="lead">A better profile starts with one simple step. Tell us a little about yourself.</p>
+      </div>
+
+      <div class="split">
+        <!-- Form (3 fields only: name, email, phone) -->
+        <div class="form-card">
+          <div class="form-head">
+            <h3 class="card-title">Start Your Brand Assessment</h3>
+            <span class="chip">Introductory ₹100</span>
+          </div>
+
+          <form id="leadForm" novalidate>
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input class="input" type="text" id="name" name="name" placeholder="e.g. Rhea Sharma" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input class="input" type="email" id="email" name="email" placeholder="you@company.com" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <div class="phone-row">
+                <div class="phone-code">🇮🇳<br />+91</div>
+                <input class="input" type="tel" id="phone" name="phone" placeholder="98765 43210" autocomplete="tel-national" inputmode="numeric" required />
+              </div>
+            </div>
+
+            <button class="submit" type="submit" id="submitBtn">
+              Continue to Payment
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+
+            <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+          </form>
+
+          <div class="trust">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>256-bit encrypted • We never share your contact details • Instant confirmation on WhatsApp &amp; Email</span>
+          </div>
+        </div>
+
+        <!-- Kick-off deliverables -->
+        <aside class="kickoff">
+          <div>
+            <div class="eyebrow-row"><span class="dot"></span><span>Kick-off Deliverables</span></div>
+            <h3 style="margin-top:16px">What's included in your ₹100 kick-off:</h3>
+            <p class="lead-dark" style="margin-top:16px">Immediate access to high-impact diagnostic materials and a concrete blueprint crafted specifically for ambitious profiles.</p>
+          </div>
+
+          <div class="deliverables">
+            <div class="deliverable">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              <div><b>20-Point LinkedIn Profile Health Audit</b><small>Systematic review across keywords, visuals, structure &amp; call-to-actions.</small></div>
+            </div>
+            <div class="deliverable">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <div><b>Personalized Profile Scorecard &amp; Gap Analysis</b><small>See where you stand vs peers in your targeted industry sector.</small></div>
+            </div>
+            <div class="deliverable">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>
+              <div><b>1-on-1 Guidance Roadmap for Immediate Fixes</b><small>Direct checklist of updates you can deploy within 24 hours.</small></div>
+            </div>
+            <div class="deliverable">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"/></svg>
+              <div><b>5 High-Impact Headline &amp; Bio Formulas</b><small>Plug-and-play copywriting templates calibrated for recruiter interest.</small></div>
+            </div>
+          </div>
+
+          <div class="kickoff-foot">
+            <span>Guaranteed Zero Up-Sells on Intake</span>
+            <span>Full ₹100 Scope</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. PRICING / PAYMENT ============ -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="h2">Your Growth Starts at Just ₹100.</h2>
+        <p class="lead">Sometimes, one small step can make a big difference. Invest just ₹100 to get started on building a stronger LinkedIn presence.</p>
+      </div>
+
+      <div class="price-card">
+        <span class="pill">Accessible Kickoff Offer</span>
+        <div class="price">
+          <span class="amount">₹100</span>
+          <span class="per">/ one-time payment</span>
+        </div>
+        <p class="price-sub">zero recurring subscription • no hidden platform charges</p>
+        <p class="price-desc">Introductory audit, personalized strategic roadmap, and actionable feedback prepared by seasoned personal branding specialists.</p>
+
+        <a class="pay-btn" href="https://payments.cashfree.com/forms/getaudit" target="_blank" rel="noopener noreferrer">
+          Proceed to Payment
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v.01M18 15v.01"/></svg>
+        </a>
+
+        <div class="secure">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          Secure payment experience.
+        </div>
+
+        <div class="gateway">
+          <div class="gateway-logos">
+            <span>UPI</span><span>Google Pay</span><span>Paytm</span><span>Cards / Netbanking</span>
+          </div>
+          <p>Razorpay / UPI / Cards Payment Gateway Integration Placeholder (Simulated in next step)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. TESTIMONIALS ============ -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="pill">Participant Spotlights</span>
+        <h2 class="h2">Real People. Real Experiences. Real Growth.</h2>
+        <p class="sub">Sample community participant feedback • Experiences reflect individual effort and profile optimization.</p>
+      </div>
+
+      <div class="t-grid">
+        <div class="t-card">
+          <div>
+            <div class="stars" aria-label="5 stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+            </div>
+            <p class="quote">"I had barely 40 connections and had never posted. The step-by-step makeover helped me articulate my project work cleanly. Recruiters started visiting my profile during placement season."</p>
+          </div>
+          <div class="t-foot">
+            <div class="t-avatar" style="background:#dbe1ff;color:#0051d5">AV</div>
+            <div><div class="t-name">Aakash Verma</div><div class="t-role">Final Year B.Tech Student, Bangalore</div></div>
+          </div>
+        </div>
+
+        <div class="t-card">
+          <div>
+            <div class="stars" aria-label="5 stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+            </div>
+            <p class="quote">"I was sending out 30 applications a week with zero callbacks. Fixing my headline, summary, and experience section made my profile look like that of a serious professional."</p>
+          </div>
+          <div class="t-foot">
+            <div class="t-avatar" style="background:#eaedff;color:#000a24">SS</div>
+            <div><div class="t-name">Sneha Sen</div><div class="t-role">Early Career Associate, Mumbai</div></div>
+          </div>
+        </div>
+
+        <div class="t-card">
+          <div>
+            <div class="stars" aria-label="5 stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+            </div>
+            <p class="quote">"The content ideas and networking scripts gave me the confidence to reach out directly to team leads. It took the intimidation out of LinkedIn."</p>
+          </div>
+          <div class="t-foot">
+            <div class="t-avatar" style="background:#0051d5;color:#fff">RN</div>
+            <div><div class="t-name">Rahul Nair</div><div class="t-role">Software Developer &amp; Job Seeker, Hyderabad</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. FAQ ============ -->
+  <section class="faq">
+    <div class="faq-wrap">
+      <div class="section-header">
+        <span class="pill">Clarity &amp; Questions</span>
+        <h2 class="h2">Got Questions? We've Got Answers.</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">I have zero LinkedIn followers. Can I still start? <svg class="chev" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 6 6 11 1"/></svg></button>
+          <div class="faq-a"><p>Yes. The audit focuses on how your profile is structured and how your story reads, so it works whether you have a handful of connections or thousands.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Will this help me get interview calls? <svg class="chev" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 6 6 11 1"/></svg></button>
+          <div class="faq-a"><p>The audit and roadmap are designed to make your profile easier for recruiters to find and understand. Results depend on your field, your effort, and the roles you target, so we don't promise specific outcomes.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Is this suitable for freshers? <svg class="chev" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 6 6 11 1"/></svg></button>
+          <div class="faq-a"><p>Yes. It's built for students, freshers, and working professionals alike.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Do I need to know how to create LinkedIn content? <svg class="chev" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 6 6 11 1"/></svg></button>
+          <div class="faq-a"><p>No. You get tested post templates, topic pillars, and a publishing cadence to follow, so you don't need prior experience.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Why is the starting fee ₹100? <svg class="chev" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 6 6 11 1"/></svg></button>
+          <div class="faq-a"><p>It's an introductory price so you can start with a diagnostic audit and a personalized roadmap before deciding on anything further.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Will I get guaranteed job offers? <svg class="chev" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 6 6 11 1"/></svg></button>
+          <div class="faq-a"><p>No. We help improve your profile and visibility, but we can't guarantee job offers or interviews.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10. FINAL CTA ============ -->
+  <section class="final">
+    <div class="final-glow-1"></div>
+    <div class="final-glow-2"></div>
+    <div class="final-inner">
+      <span class="pill-dark">Take the next step today</span>
+      <h2>Your Next Opportunity Could Start With a Better LinkedIn Presence.</h2>
+      <p>Don't let your skills go unnoticed. Take the first step towards building a professional identity that represents your true potential.</p>
+      <div class="cta-wrap">
+        <a href="#form" class="btn btn-primary">Start Your Journey – ₹100
+          <svg class="icon" style="width:12px;height:12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <p class="small-print">Simple registration • Secure payment • Begin within 5 minutes</p>
+    </div>
+  </section>
+
+  <script>
+    // ---------- Google Apps Script endpoint ----------
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwz667qIxsyB3D-oK1HEVSOwgBt35Z2aXTScRGxzGA_XMilwmbHAqi0xDS83fT9y0Sg/exec";
+
+    // ---------- Lead form submit (file:// safe) ----------
+    const form = document.getElementById("leadForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusEl = document.getElementById("formStatus");
+    const PAYMENT_URL = "https://payments.cashfree.com/forms/getaudit";
+
+    function showSuccess() {
+      statusEl.className = "form-status show ok";
+      statusEl.innerHTML = 'Thanks! Your details are saved. <a href="' + PAYMENT_URL + '" target="_blank" rel="noopener noreferrer">Proceed to payment →</a>';
+      submitBtn.disabled = false;
+      submitBtn.firstChild.textContent = "Continue to Payment ";
+      form.reset();
+    }
+
+    function showError() {
+      statusEl.className = "form-status show err";
+      statusEl.textContent = "Something went wrong while saving your details. Please try again.";
+      submitBtn.disabled = false;
+      submitBtn.firstChild.textContent = "Continue to Payment ";
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+
+      if (!name || !email || !phone) {
+        statusEl.className = "form-status show err";
+        statusEl.textContent = "Please fill in your name, email and phone number.";
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.firstChild.textContent = "Saving… ";
+      statusEl.className = "form-status";
+
+      const url = SCRIPT_URL + "?" + new URLSearchParams({ name: name, email: email, phone: phone });
+
+      fetch(url, { method: "GET", mode: "no-cors" })
+        .then(() => showSuccess())
+        .catch(() => showError());
+    });
+
+    // ---------- FAQ accordion ----------
+    document.querySelectorAll(".faq-item").forEach(function (item) {
+      const btn = item.querySelector(".faq-q");
+      btn.addEventListener("click", function () {
+        const isOpen = item.classList.toggle("open");
+        btn.setAttribute("aria-expanded", String(isOpen));
+      });
+    });
+  </script>
+</body>
+</html>
